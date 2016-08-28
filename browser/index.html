@@ -7,7 +7,7 @@
     <link href="/style.css" rel="stylesheet" />
   </head>
   <body>
-    <div id="main" class="container-fluid">
+    <div id="main" class="container-fluid" ng-app="juke">
 
       <div class="col-xs-2">
         <sidebar>
@@ -20,10 +20,47 @@
         </sidebar>
       </div>
 
-      <div class="col-xs-10"></div>
+      <div class="col-xs-10">
+
+        <div class="album" ng-controller="albumController">
+          <p>
+            <h3>{{ album.name }}</h3>
+            <img ng-src="{{album.imageUrl}}" class="img-thumbnail">
+          </p>
+          <table class='table'>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Artists</th>
+                <th>Genre</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="song in album.songs">
+                <td>
+                  <button class="btn btn-default btn-xs">
+                    <span class="glyphicon glyphicon-play" ng-click="start()"></span>
+                  </button>
+                </td>
+                <td>{{ song.name }}</td>
+                <td><span ng-repeat="artist in song.artists">{{ artist.name }} </span></td>
+                <td>{{ song.genre }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
 
       <footer></footer>
 
     </div>
+
+    <script type="text/javascript" src="/angular/angular.js"></script>
+    <script type="text/javascript" src="/app.js"></script>
+    <script type="text/javascript" src="/albums/albums.controller.js"></script>
+    <script type="text/javascript" src="/albums/albums.factory.js"></script>
+
   </body>
 </html>
